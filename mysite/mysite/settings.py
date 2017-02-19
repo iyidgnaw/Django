@@ -25,12 +25,13 @@ SECRET_KEY = '2+)k04dhish0a@-x)d$9cbk*zdnv03=bht*$pcezpvo7to9u#h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.29.120"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'music.apps.MusicConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

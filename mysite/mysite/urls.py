@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',view.index),
     url(r'^polls/', include('polls.urls')),
+    url(r'^music/', include('music.urls')),
     url(r'^time/$', view.current_datetime),
     url(r'^test/$', view.test),
     url(r'^time/plus/(\d{1,2})/$', view.hours_ahead),

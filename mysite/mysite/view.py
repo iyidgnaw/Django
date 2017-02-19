@@ -4,7 +4,7 @@ from django.http import HttpResponse
 import datetime
 
 def index(request):
-    return HttpResponse("Hello world")
+    return HttpResponse("Hello world!!!")
 
 
 def current_datetime(request):
