@@ -1,0 +1,20 @@
+{% extends 'wowCS/base.html' %}
+
+{% block body %}
+    {% if all_notes %}
+
+        <h3> Here are all my notes:</h3>
+        <ul>
+            {% for note in all_notes %}
+            <li> <a href = '/wowCS/{{ note.notebook.notebook_title }}/{{ note.id }}'>{{note.note_title}}</a></li>
+
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <h3> You don't have any note yet.</h3>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'wowCS/base.html' %}
+{% block title %}Notebook Catalogue{% endblock %}
+{% block body %}
+
+
+
+
+    <h1>{{ notebook.notebook_title }}</h1>
+    <h3>{{ notebook.notebook_description }}</h3>
+
+
+    <ul>
+            {% for note in notebook.note_set.all %}
+
+                <li> <a href = '{% url 'wowCS:detail' note.notebook.notebook_title note.id %}'>{{note.note_title}}</a></li>
+
+            {% endfor %}
+        </ul>
+
+    {% if error_message %}
+
+        <p><strong>{{ error_message }}</strong></p>
+
+    {% endif %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

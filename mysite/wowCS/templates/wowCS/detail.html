@@ -1,0 +1,48 @@
+{% extends 'wowCS/base.html' %}
+{% block title %}{{ note.note_title }}{% endblock %}
+{% block body %}
+
+
+    <h1>{{ note.note_title }}</h1>
+    <h3>{{ note.note_content }}</h3>
+
+    {% if error_message %}
+
+        <p><strong>{{ error_message }}</strong></p>
+
+    {% endif %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
