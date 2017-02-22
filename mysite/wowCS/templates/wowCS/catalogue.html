@@ -2,20 +2,24 @@
 {% block title %}Notebook Catalogue{% endblock %}
 {% block body %}
 
-
-
-
     <h1>{{ notebook.notebook_title }}</h1>
     <h3>{{ notebook.notebook_description }}</h3>
 
 
     <ul>
-            {% for note in notebook.note_set.all %}
+        {% for note in notebook.note_set.all %}
 
-                <li> <a href = '{% url 'wowCS:detail' note.notebook.notebook_title note.id %}'>{{note.note_title}}</a></li>
+            <li><a href = '{% url 'wowCS:detail' note.notebook.notebook_title note.id %}'>{{note.note_title}}</a>
 
-            {% endfor %}
-        </ul>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+
+    <a href="{% url 'wowCS:note-add' notebook.notebook_title%}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Note
+    </a>
 
     {% if error_message %}
 

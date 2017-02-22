@@ -11,7 +11,7 @@ class Notebook(models.Model):
     notebook_description = models.CharField(max_length=250)
 
     def get_absolute_url(self):
-        return reverse('wowCS:detail',kwargs={'pk':self.pk})
+        return reverse('wowCS:index')
 
     def __str__(self):
         return self.notebook_title
@@ -19,10 +19,13 @@ class Notebook(models.Model):
 
 class Note(models.Model):
 
-    notebook = models.ForeignKey(Notebook,on_delete= models.CASCADE)
+    notebook = models.ForeignKey(Notebook,on_delete= models.CASCADE,null=True,blank=True)
     note_title = models.CharField(max_length=200)
-    note_content = models.CharField(max_length=20000)
+    note_content = models.FileField(upload_to='uploads/')
     is_favorite = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse('wowCS:catalogue',kwargs={'notebook_title':self.notebook})
 
     def __str__(self):
         return self.note_title

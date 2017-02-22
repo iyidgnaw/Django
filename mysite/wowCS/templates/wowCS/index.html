@@ -6,7 +6,9 @@
         <h3> Here are all my notebooks:</h3>
         <ul>
             {% for notebook in all_notebook %}
-            <li> <a href = '{% url 'wowCS:catalogue' notebook.notebook_title %}'>{{notebook.notebook_title}}</a></li>
+            <li> <a href = '{% url 'wowCS:catalogue' notebook.notebook_title %}'>{{notebook.notebook_title}}</a>
+
+            </li>
 
             {% endfor %}
         </ul>
