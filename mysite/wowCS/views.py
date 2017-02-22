@@ -28,3 +28,4 @@ class NotebookCreate(CreateView):
     model = Notebook
     fields = ['notebook_title','genre','notebook_description']
 
+

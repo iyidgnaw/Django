@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ["127.0.0.1","192.168.29.120"]
 # Application definition
 
 INSTALLED_APPS = [
-    'music.apps.MusicConfig',
     'wowCS.apps.WowcsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

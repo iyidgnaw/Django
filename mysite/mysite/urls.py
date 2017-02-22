@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf.urls import include,url
 from django.contrib import admin
 admin.autodiscover()
-from . import view
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',view.index),
-    url(r'^music/', include('music.urls')),
     url(r'^wowCS/', include('wowCS.urls')),
+    url(r'^', include('wowCS.urls')),
 ]
