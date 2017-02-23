@@ -7,6 +7,8 @@ app_name = 'wowCS'
 urlpatterns = [
     # main page of the root
     url(r'^$',views.IndexView.as_view(),name = 'index'),
+
+    url(r'^register/$',views.UserFormView.as_view(),name = 'register'),
     # /notes/
     url(r'notes/$',views.show_all_notes, name = 'show_all_notes'),
     # /Python/

@@ -7,3 +7,13 @@ class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
         fields = ['note_title','note_content']
+
+
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
+    class Meta:
+        model = User
+        fields = ['username','email','password']
