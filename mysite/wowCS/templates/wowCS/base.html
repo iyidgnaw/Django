@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+{% block extend-header %}
 
+{% endblock %}
 </head>
+
+
 <body>
     <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -49,7 +53,7 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent1</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent2</a></li>
                     <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New Notebook</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:notebook-add' %}">New Notebook</a></li>
                   </ul>
               </li>
               <li class="" >
@@ -60,7 +64,7 @@
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent1</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent2</a></li>
                     <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New Note</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:note-add' %}">New Note</a></li>
                   </ul>
               </li>
                 <li class="" >

@@ -20,11 +20,10 @@ class Notebook(models.Model):
 
 
 class Note(models.Model):
-
     notebook = models.ForeignKey(Notebook,on_delete= models.CASCADE,null=True,blank=True)
     user = models.ForeignKey(User, default=1)
     note_title = models.CharField(max_length=200)
-    note_content = models.FileField(upload_to='uploads/')
+    note_content = models.TextField()
     is_favorite = models.BooleanField(default=False)
 
     def get_absolute_url(self):

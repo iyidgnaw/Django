@@ -2,13 +2,13 @@ from django.views import generic
 from django.views.generic.edit import CreateView
 from .models import Notebook,Note
 from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.generic import View
-from .forms import UserForm
+from .forms import UserForm,NoteBookForm,NoteForm
 from .serializers import NoteSerializer,NoteBookSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth.decorators import login_required
 import pypandoc
 
 
@@ -80,7 +80,7 @@ def detail(request,note_id):
     note = Note.objects.get(id=note_id)
     # show the detail only if the requested note belongs to the current user
     if note.user==request.user:
-        html = pypandoc.convert_file(note.note_content.url, 'html')
+        html = pypandoc.convert_text(note.note_content, 'html',format='md')
         return render(request, 'wowCS/detail.html', {'note': note,'note_content':html})
     else:
         return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't see that note!</h1>"})
@@ -111,6 +111,38 @@ def profile(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
     return render(request,'wowCS/profile.html',{'user':request.user})
+
+def create_notebook(request):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    else:
+        form = NoteBookForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            notebook = form.save(commit=False)
+            notebook.user = request.user
+            notebook.save()
+            return HttpResponseRedirect(notebook.get_absolute_url())
+        context = {
+            "form": form,
+        }
+        return render(request, 'wowCS/create_notebook.html', context)
+
+def create_note(request):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    else:
+        form = NoteForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.user = request.user
+            note.save()
+            # html = pypandoc.convert_text(note.note_content,'html',format='md') 
+            return HttpResponseRedirect(note.get_absolute_url())
+        context = {
+            "form": form,
+        }
+        return render(request, 'wowCS/create_note.html', context)
+
 
 class UserFormView(View):
     form_class = UserForm

@@ -24,11 +24,13 @@ urlpatterns = [
 
 
 
+
+
     # # /add_notebook/
-    # url(r'add/notebook/$', views.NotebookCreate.as_view(), name='notebook-add'),
+    url(r'add/notebook/$', views.create_notebook, name='notebook-add'),
     #
-    # # /Python/add/
-    # url(r'^add/note/$', views.NoteCreate.as_view(), name='note-add'),
+    # /Python/add/
+    url(r'add/note/$', views.create_note, name='note-add'),
 
 
     # api
