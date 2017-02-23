@@ -3,13 +3,14 @@
 {% block body %}
     {% if all_notes %}
 
-        <h3> Here are all my notes:</h3>
-        <ul>
+        <h3> My notes:</h3>
+        <div class="list-group">
             {% for note in all_notes %}
-            <li> <a href = '/wowCS/{{ note.notebook.notebook_title }}/{{ note.id }}'>{{note.note_title}}</a></li>
-
+              <a  class="list-group-item"
+                  href = '/wowCS/{{ note.notebook.notebook_title }}/{{ note.id }}'>{{note.note_title}}
+              </a>
             {% endfor %}
-        </ul>
+        </div>
 
     {% else %}
 

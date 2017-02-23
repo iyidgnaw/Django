@@ -3,16 +3,15 @@
 {% block body %}
     {% if all_notebook %}
 
-        <h3> Here are all my notebooks:</h3>
-        <ul>
+        <h3> My notebooks:</h3>
+
+        <div class="list-group">
             {% for notebook in all_notebook %}
-            <li> <a href = '{% url 'wowCS:catalogue' notebook.notebook_title %}'>{{notebook.notebook_title}}</a>
-
-            </li>
-
+            <a class="list-group-item"
+               href = '{% url 'wowCS:catalogue' notebook.notebook_title %}'>
+               {{notebook.notebook_title}}</a>
             {% endfor %}
-        </ul>
-
+        </div>
     {% else %}
 
         <h3> You don't have any notebook yet.</h3>

@@ -42,25 +42,32 @@
             </ul-->
             <ul class="nav navbar-nav navbar-right">
               <li class="" >
-                  <a href="{% url 'wowCS:index' %}">
+                  <a id="menu3" class="dropdown-toggle" data-toggle="dropdown" href="{% url 'wowCS:index' %}">
                       <span class="glyphicon" aria-hidden="true"></span>&nbsp;Notebooks
                   </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent1</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent2</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New Notebook</a></li>
+                  </ul>
               </li>
               <li class="" >
-                  <a href="{% url 'wowCS:show_all_notes' %}">
+                  <a id="menu2" class="dropdown-toggle" data-toggle="dropdown" href="">
                       <span class="glyphicon" aria-hidden="true"></span>&nbsp;Notes
                   </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent1</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent2</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New Note</a></li>
+                  </ul>
               </li>
                 <li class="" >
-                    <a href="{% url 'wowCS:notebook-add' %}">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Notebook
-                    </a>
-                </li>
-                <li class="" >
-                    <a class="dropdown-toggle" id="menu1" href="#" data-toggle="dropdown">
+                    <a class="dropdown-toggle" id="menu3" href="#" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;USER
                     </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
                       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
                       <li role="presentation" class="divider"></li>
                       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
@@ -72,9 +79,10 @@
     </div>
 
 </nav>
-
+    <div class="container">
     {% block body %}
 
     {% endblock %}
+    </div>
 </body>
 </html>
