@@ -20,3 +20,23 @@ python3 manage.py runserver
 ```
 
 Open http://127.0.0.1:8000/wowCS/ in your browser.
+
+
+
+
+
+
+
+## Update Log:
+
+#### 2.22 Version 0.3
+
+Diyi
+
+- Add user login/logout/register/
+- Add user_auth for each function.
+- Optimize the url routing rules
+
+Xueguang
+
+- Add Drop downs and list display.
