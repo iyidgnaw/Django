@@ -7,7 +7,7 @@
         <div class="list-group">
             {% for note in all_notes %}
               <a  class="list-group-item"
-                  href = '/wowCS/{{ note.notebook.notebook_title }}/{{ note.id }}'>{{note.note_title}}
+                  href = '{% url 'wowCS:detail' note.id %}'>{{note.note_title}}
               </a>
             {% endfor %}
         </div>

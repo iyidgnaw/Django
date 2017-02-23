@@ -1,5 +1,4 @@
 from django.conf.urls import url
-
 from . import views
 
 app_name = 'wowCS'
@@ -7,17 +6,36 @@ app_name = 'wowCS'
 urlpatterns = [
     # main page of the root
     url(r'^$',views.IndexView.as_view(),name = 'index'),
-
+    # login
+    url(r'^login/$',views.log_in,name = 'login'),
+    # logout
+    url(r'^logout/$', views.log_out, name='logout'),
+    # register
     url(r'^register/$',views.UserFormView.as_view(),name = 'register'),
+    # profile
+    url(r'^profile/$',views.UserFormView.as_view(),name = 'register'),
     # /notes/
-    url(r'notes/$',views.show_all_notes, name = 'show_all_notes'),
+    url(r'^note/all/$',views.AllNotesView.as_view(), name = 'show_all_notes'),
     # /Python/
-    url(r'^(?P<notebook_title>[a-zA-Z]+)/$',views.catalogue, name = 'catalogue'),
+    url(r'^notebook/(?P<notebook_title>[a-zA-Z]+)/$',views.NoteBookView.as_view(), name = 'catalogue'),
     # /Python/1/
-    url(r'^(?P<notebook_title>[a-zA-Z]+)/(?P<note_id>[0-9]+)/$',views.detail, name = 'detail'),
-    # /add_notebook/
-    url(r'add_notebook/$', views.NotebookCreate.as_view(), name='notebook-add'),
-    # /Python/add/
-    url(r'^(?P<notebook_title>[a-zA-Z]+)/add/$', views.NoteCreate.as_view(), name='note-add'),
+    url(r'^note/(?P<note_id>[0-9]+)/$',views.detail, name = 'detail'),
+
+
+
+
+    # # /add_notebook/
+    # url(r'add/notebook/$', views.NotebookCreate.as_view(), name='notebook-add'),
+    #
+    # # /Python/add/
+    # url(r'^add/note/$', views.NoteCreate.as_view(), name='note-add'),
+
+
+    # api
+
+    # method : get
+    url(r'^api/5recentnotes/$', views.RecentNoteList.as_view(), name='5recentnotes'),
+    # method : get
+    url(r'^api/5recentnotebooks/$',views.RecentNotebookList.as_view(),name='5recentnotebooks'),
 
 ]

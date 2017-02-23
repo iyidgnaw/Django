@@ -10,7 +10,7 @@
         {% for note in notebook.note_set.all %}
 
           <a class="list-group-item"
-             href = '{% url 'wowCS:detail' note.notebook.notebook_title note.id %}'>
+             href = '{% url 'wowCS:detail' note.id %}'>
             {{note.note_title}}
           </a>
 
@@ -19,9 +19,9 @@
     </div>
 
 
-    <a href="{% url 'wowCS:note-add' notebook.notebook_title%}">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Note
-    </a>
+{#    <a href="{% url 'wowCS:note-add' notebook.notebook_title%}">#}
+{#        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Note#}
+{#    </a>#}
 
     {% if error_message %}
 
