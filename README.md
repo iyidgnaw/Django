@@ -37,7 +37,18 @@ Diyi
 - Add user login/logout/register/profile
 - Add user_auth for each function.
 - Optimize the url routing rules
+- Create Restful API
 
 Xueguang
 
 - Add Drop downs and list display.
+
+#### 2.23 Version 0.4
+
+Diyi
+
+- Add create notebook and note 
+
+- Insert the Django pagedown widget in create/edit note.
+
+  ​
