@@ -107,6 +107,11 @@ def log_out(request):
     }
     return render(request, 'wowCS/login.html', context)
 
+def profile(request):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    return render(request,'wowCS/profile.html',{'user':request.user})
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'wowCS/registration_form.html'

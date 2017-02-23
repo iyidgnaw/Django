@@ -5,6 +5,7 @@ If you don't have Django>=1.10.5 and markdown>=2.6.8, then
 pip install Django==1.10.5
 pip install markdown
 pip install pypandoc
+pip install djangorestframework
 ```
 We also need Pandoc to be installed on your server.
 
@@ -33,7 +34,7 @@ Open http://127.0.0.1:8000/wowCS/ in your browser.
 
 Diyi
 
-- Add user login/logout/register/
+- Add user login/logout/register/profile
 - Add user_auth for each function.
 - Optimize the url routing rules
 

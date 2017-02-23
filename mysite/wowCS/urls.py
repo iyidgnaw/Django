@@ -13,7 +13,7 @@ urlpatterns = [
     # register
     url(r'^register/$',views.UserFormView.as_view(),name = 'register'),
     # profile
-    url(r'^profile/$',views.UserFormView.as_view(),name = 'register'),
+    url(r'^profile/$',views.profile,name = 'profile'),
     # /notes/
     url(r'^note/all/$',views.AllNotesView.as_view(), name = 'show_all_notes'),
     # /Python/
