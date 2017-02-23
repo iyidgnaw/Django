@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView
 from .models import Notebook,Note
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.generic import View
@@ -127,6 +127,30 @@ def create_notebook(request):
         }
         return render(request, 'wowCS/create_notebook.html', context)
 
+def update_notebook(request,notebook_title):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    
+    instance = get_object_or_404(Notebook, notebook_title=notebook_title)
+    form = NoteBookForm(request.POST or None, request.FILES or None, instance=instance)
+    if instance.user!=request.user:
+        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't see that notebook!</h1>"})
+    # the form is valid when the method is POST and files exist.
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+
+    context = {
+        "title": instance.notebook_title,
+        "instance": instance,
+        "form":form,
+    }
+
+    # for the get method
+    return render(request, "wowCS/notebook_form.html", context)
+
+
 def create_note(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
@@ -142,6 +166,34 @@ def create_note(request):
             "form": form,
         }
         return render(request, 'wowCS/create_note.html', context)
+
+def update_note(request,note_id):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    
+    instance = get_object_or_404(Note, id=note_id)
+    
+    if instance.user!=request.user:
+        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't change that note!</h1>"})
+    
+
+    form = NoteForm(request.POST or None, request.FILES or None, instance=instance)
+    
+    # the form is valid when the method is POST and files exist.
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+
+    context = {
+        "title": instance.note_title,
+        "instance": instance,
+        "form":form,
+    }
+
+    # for the get method
+    return render(request, "wowCS/note_form.html", context)
+
 
 
 class UserFormView(View):

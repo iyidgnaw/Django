@@ -28,10 +28,13 @@ urlpatterns = [
 
     # # /add_notebook/
     url(r'add/notebook/$', views.create_notebook, name='notebook-add'),
+    # /update/notebook/Python/
+    url(r'update/notebook/(?P<notebook_title>[a-zA-Z]+)/$', views.update_notebook, name='notebook-update'),
     #
     # /Python/add/
     url(r'add/note/$', views.create_note, name='note-add'),
-
+    # /update/note/1/
+    url(r'update/note/(?P<note_id>[0-9]+)/$', views.update_note, name='note-update'),
 
     # api
 
