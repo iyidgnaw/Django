@@ -10,7 +10,7 @@ from .serializers import NoteSerializer,NoteBookSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import pypandoc
-
+import re
 
 
 
@@ -144,6 +144,8 @@ class UserFormView(View):
             defaultNB.notebook_description = 'Default Notebook.'
             defaultNB.save()
 
+            # Generate a introduction note for new user.
+
             # returns User objects if credentials are correct
             user = authenticate(username = username,password=password)
             if user is not None and user.is_active:
@@ -168,6 +170,9 @@ def create_notebook(request):
         if form.is_valid():
 
             notebook = form.save(commit=False)
+            if not re.match('^[a-zA-Z0-9]+$',notebook.notebook_title):
+                context = {"form": form,'error_message':"Illegal Notebook name!"}
+                return render(request, 'wowCS/create_notebook.html', context)
             notebook.user = request.user
             try:
                 notebook.save()

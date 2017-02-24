@@ -2,6 +2,9 @@
 {% block title %}Add a New Notebook{% endblock %}
 
 {% block body %}
+
+
+
 <div class="container-fluid">
 
     <div class="row">
@@ -13,6 +16,7 @@
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
+                    <p>Only Numbers and English Letters are allowed in notebook_title</p>
                     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% include 'wowCS/form-template.html' %}
