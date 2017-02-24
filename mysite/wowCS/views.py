@@ -223,7 +223,7 @@ def create_note(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
     else:
-        form = NoteForm(request.POST or None, request.FILES or None)
+        form = NoteForm(request.POST or None, request.FILES or None,user=request.user,)
         if form.is_valid():
             note = form.save(commit=False)
             note.user = request.user
@@ -282,7 +282,7 @@ class RecentNoteList(APIView):
 
     # List all notes
     def get(self,request):
-        notes = Note.objects.all()
+        notes = Note.objects.filter(user=request.user)
         if len(notes)<=5:
             pass
         else:
@@ -294,7 +294,7 @@ class RecentNotebookList(APIView):
 
     # List all notebooks
     def get(self,request):
-        notebooks = Notebook.objects.all()
+        notebooks = Notebook.objects.filter(user=request.user)
         if len(notebooks)<=5:
             pass
         else:

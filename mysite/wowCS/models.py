@@ -9,12 +9,12 @@ from django.contrib.auth.models import Permission, User
 class Notebook(models.Model):
     user = models.ForeignKey(User, default=1)
     notebook_title = models.CharField(max_length=500)
-    genre = models.CharField(max_length=100)
-    notebook_description = models.CharField(max_length=250)
+    genre = models.CharField(max_length=100,default='Not Classified')
+    notebook_description = models.CharField(max_length=250,null=True)
 
     class Meta:
         unique_together = ('user', 'notebook_title',)
-        
+
     def get_absolute_url(self):
         return reverse('wowCS:index')
 

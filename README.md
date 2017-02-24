@@ -51,4 +51,14 @@ Diyi
 
 - Insert the Django pagedown widget in create/edit note.
 
+- Solve the illegal notebook_title problem
+
+- Filter the  user available notebooks seen in the drop down list in creating a new note.
+
+- Solve the duplicate notebook name problem.
+
+- add empty default notebook for new user.
+
+  ​
+
   ​

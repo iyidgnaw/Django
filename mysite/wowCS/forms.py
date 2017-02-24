@@ -14,10 +14,11 @@ class NoteBookForm(forms.ModelForm):
 
 
 class NoteForm(forms.ModelForm):
-	# def __init__(self,user, *args, **kwargs):
- #            self.user = kwargs.pop('user', None)
- #            super(NoteForm, self).__init__(*args, **kwargs)
- #            self.fields['notebook'].queryset = Notebook.objects.filter(user = self.user)
+	def __init__(self, *args, **kwargs):
+			user = kwargs.pop('user', None)
+			super(NoteForm, self).__init__(*args, **kwargs)
+			if user:
+				self.fields['notebook'].queryset = Notebook.objects.filter(user = user)
 
 	note_content = forms.CharField(widget=PagedownWidget())
 	class Meta:
