@@ -7,12 +7,18 @@ from pagedown.widgets import PagedownWidget
 
 class NoteBookForm(forms.ModelForm):
 	
+
 	class Meta:
 		model = Notebook
 		fields = ('notebook_title','genre','notebook_description')
 
 
 class NoteForm(forms.ModelForm):
+	# def __init__(self,user, *args, **kwargs):
+ #            self.user = kwargs.pop('user', None)
+ #            super(NoteForm, self).__init__(*args, **kwargs)
+ #            self.fields['notebook'].queryset = Notebook.objects.filter(user = self.user)
+
 	note_content = forms.CharField(widget=PagedownWidget())
 	class Meta:
 		model = Note

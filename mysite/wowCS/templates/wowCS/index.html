@@ -12,10 +12,20 @@
                {{notebook.notebook_title}}</a>
             {% endfor %}
         </div>
+
     {% else %}
 
         <h3> You don't have any notebook yet.</h3>
 
     {% endif %}
+
+    <div class="col-sm-12">
+        <br>
+        <a href="{% url 'wowCS:notebook-add' %}">
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp; Add a Notebook
+            </button>
+        </a>
+    </div>
 
 {% endblock %}

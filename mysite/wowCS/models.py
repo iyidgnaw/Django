@@ -12,6 +12,9 @@ class Notebook(models.Model):
     genre = models.CharField(max_length=100)
     notebook_description = models.CharField(max_length=250)
 
+    class Meta:
+        unique_together = ('user', 'notebook_title',)
+        
     def get_absolute_url(self):
         return reverse('wowCS:index')
 

@@ -14,7 +14,7 @@ import pypandoc
 
 
 
-
+# index view
 class IndexView(generic.ListView):
 
     template_name = 'wowCS/index.html'
@@ -31,12 +31,13 @@ class IndexView(generic.ListView):
             context = self.get_context_data()
             return self.render_to_response(context)
 
+# catalogue view for given notebook_title
 class NoteBookView(generic.ListView):
     template_name = 'wowCS/catalogue.html'
     context_object_name = 'notebook'
 
     def get_queryset(self):
-        notebook = Notebook.objects.get(notebook_title=self.kwargs.get('notebook_title'))
+        notebook = Notebook.objects.get(notebook_title=self.kwargs.get('notebook_title'),user=self.request.user)
         # if the requested notebook doesn't belong to the current user, then return None
         if notebook.user==self.request.user:
             return notebook
@@ -54,6 +55,7 @@ class NoteBookView(generic.ListView):
             context = self.get_context_data()
             return self.render_to_response(context)
 
+# all notes view for listing all notes.
 class AllNotesView(generic.ListView):
     template_name = 'wowCS/show_all_notes.html'
     context_object_name = 'all_notes'
@@ -73,6 +75,7 @@ class AllNotesView(generic.ListView):
                 notes.append(note.pk)
         return Note.objects.filter(pk__in=notes)
 
+#detail view for the detail of a note
 def detail(request,note_id):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
@@ -85,6 +88,8 @@ def detail(request,note_id):
     else:
         return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't see that note!</h1>"})
 
+
+# functions and class for login/logout/register/profile
 def log_in(request):
     if request.user.is_authenticated():
         return render(request, 'wowCS/index.html')
@@ -107,20 +112,68 @@ def log_out(request):
     }
     return render(request, 'wowCS/login.html', context)
 
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'wowCS/registration_form.html'
+
+    # display a blank form
+    def get(self,request):
+        form = self.form_class(None)
+        return render(request,self.template_name,{'form':form})
+
+
+    # process form data
+    def post(self,request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # create an object from the form data but not saved.
+            user = form.save(commit=False)
+
+            # cleaned (normalized) data
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            user.set_password(password)
+            user.save()
+            
+            # Generate a default empty notebook for user.
+            defaultNB = Notebook()
+            defaultNB.notebook_title = 'default'
+            defaultNB.user = user
+            defaultNB.genre = 'blank'
+            defaultNB.notebook_description = 'Default Notebook.'
+            defaultNB.save()
+
+            # returns User objects if credentials are correct
+            user = authenticate(username = username,password=password)
+            if user is not None and user.is_active:
+                login(request,user)
+                return redirect('wowCS:index')
+                # request.user.username/profile...
+        else:
+            return render(request, self.template_name, {'form': form})
+
 def profile(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
     return render(request,'wowCS/profile.html',{'user':request.user})
 
+
+# create/update/delete/ notebook
 def create_notebook(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
     else:
         form = NoteBookForm(request.POST or None, request.FILES or None)
         if form.is_valid():
+
             notebook = form.save(commit=False)
             notebook.user = request.user
-            notebook.save()
+            try:
+                notebook.save()
+            except:
+                context = {"form": form,'error_message':"Duplicate Notebook name!"}
+                return render(request, 'wowCS/create_notebook.html', context)
             return HttpResponseRedirect(notebook.get_absolute_url())
         context = {
             "form": form,
@@ -134,7 +187,7 @@ def update_notebook(request,notebook_title):
     instance = get_object_or_404(Notebook, notebook_title=notebook_title)
     form = NoteBookForm(request.POST or None, request.FILES or None, instance=instance)
     if instance.user!=request.user:
-        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't see that notebook!</h1>"})
+        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't update that notebook!</h1>"})
     # the form is valid when the method is POST and files exist.
     if form.is_valid():
         instance = form.save(commit=False)
@@ -150,7 +203,17 @@ def update_notebook(request,notebook_title):
     # for the get method
     return render(request, "wowCS/notebook_form.html", context)
 
+def delete_notebook(request, notebook_title):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    
+    instance = get_object_or_404(Notebook, notebook_title=notebook_title)
+    if instance.user!=request.user:
+        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't delete that notebook!</h1>"})
+    instance.delete()
+    return redirect("wowCS:index")
 
+# create/update/delete/ note
 def create_note(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
@@ -194,41 +257,22 @@ def update_note(request,note_id):
     # for the get method
     return render(request, "wowCS/note_form.html", context)
 
+def delete_note(request, note_id):
+    if not request.user.is_authenticated():
+        return render(request, 'wowCS/login.html')
+    
+    instance = get_object_or_404(Note, id=note_id)
+    notebook = instance.notebook
+    if instance.user!=request.user:
+        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't delete that note!</h1>"})
+    returning = HttpResponseRedirect(instance.get_absolute_url())
+    instance.delete()
+    return returning
 
 
-class UserFormView(View):
-    form_class = UserForm
-    template_name = 'wowCS/registration_form.html'
-
-    # display a blank form
-    def get(self,request):
-        form = self.form_class(None)
-        return render(request,self.template_name,{'form':form})
 
 
-    # process form data
-    def post(self,request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            # create an object from the form data but not saved.
-            user = form.save(commit=False)
-
-            # cleaned (normalized) data
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            user.set_password(password)
-            user.save()
-
-            # returns User objects if credentials are correct
-            user = authenticate(username = username,password=password)
-            if user is not None and user.is_active:
-                login(request,user)
-                return redirect('wowCS:index')
-                # request.user.username/profile...
-        else:
-            return render(request, self.template_name, {'form': form})
-
+# restful API
 class RecentNoteList(APIView):
 
     # List all notes

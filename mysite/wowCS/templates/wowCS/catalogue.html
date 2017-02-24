@@ -18,11 +18,15 @@
         {% endfor %}
     </div>
 
-
-{#    <a href="{% url 'wowCS:note-add' notebook.notebook_title%}">#}
-{#        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Note#}
-{#    </a>#}
-
+    <div class="col-sm-12">
+        <br>
+        <a href="{% url 'wowCS:note-add' %}">
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp; Add a Note
+            </button>
+        </a>
+    </div>
+      
     {% if error_message %}
 
         <p><strong>{{ error_message }}</strong></p>

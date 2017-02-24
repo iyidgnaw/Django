@@ -17,24 +17,24 @@ urlpatterns = [
     # /notes/
     url(r'^note/all/$',views.AllNotesView.as_view(), name = 'show_all_notes'),
     # /Python/
-    url(r'^notebook/(?P<notebook_title>[a-zA-Z]+)/$',views.NoteBookView.as_view(), name = 'catalogue'),
+    url(r'^notebook/(?P<notebook_title>[a-zA-Z0-9]+)/$',views.NoteBookView.as_view(), name = 'catalogue'),
     # /Python/1/
     url(r'^note/(?P<note_id>[0-9]+)/$',views.detail, name = 'detail'),
-
-
-
-
 
 
     # # /add_notebook/
     url(r'add/notebook/$', views.create_notebook, name='notebook-add'),
     # /update/notebook/Python/
-    url(r'update/notebook/(?P<notebook_title>[a-zA-Z]+)/$', views.update_notebook, name='notebook-update'),
-    #
+    url(r'update/notebook/(?P<notebook_title>[a-zA-Z]+)/$', views.update_notebook, name='notebook-update'), 
+    # /delete/notebook/Python/
+    url(r'delete/notebook/(?P<notebook_title>[a-zA-Z]+)/$', views.delete_notebook, name='notebook-delete'), 
+
     # /Python/add/
     url(r'add/note/$', views.create_note, name='note-add'),
     # /update/note/1/
     url(r'update/note/(?P<note_id>[0-9]+)/$', views.update_note, name='note-update'),
+    # /delete/note/1/
+    url(r'delete/note/(?P<note_id>[0-9]+)/$', views.delete_note, name='note-delete'),
 
     # api
 
