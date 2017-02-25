@@ -29,14 +29,23 @@ class Note(models.Model):
     note_content = models.TextField()
     # public/private status
     ispublic = models.BooleanField(default=True)
-    # the status of being marked as favorite.
-    # is_favorite = models.BooleanField(default=False)
-    # the count of up vote.
-    # upcount =
+    # the count of marked as favorite.
+    favorite_count = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('wowCS:catalogue',kwargs={'notebook_title':self.notebook})
 
     def __str__(self):
         return self.note_title
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, default=1)
+    favorite_id = models.IntegerField()
+
+    class Meta:
+        unique_together = ('user', 'favorite_id',)
+
+
+
 

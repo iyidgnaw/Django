@@ -14,11 +14,14 @@ urlpatterns = [
     url(r'^register/$',views.UserFormView.as_view(),name = 'register'),
     # profile
     url(r'^profile/$',views.profile,name = 'profile'),
-    # /notes/
-    url(r'^note/all/$',views.AllNotesView.as_view(), name = 'show_all_notes'),
-    # /Python/
+    # /allnote/
+    url(r'^allnote/$',views.AllNotesView.as_view(), name = 'show_all_notes'),
+    # /allnote/
+    url(r'^allnotebook/$', views.AllNotebooksView.as_view(), name='show_all_notebooks'),
+
+    # /notebook/Python/
     url(r'^notebook/(?P<notebook_title>[a-zA-Z0-9]+)/$',views.NoteBookView.as_view(), name = 'catalogue'),
-    # /Python/1/
+    # /note/1/
     url(r'^note/(?P<note_id>[0-9]+)/$',views.detail, name = 'detail'),
 
 
@@ -35,6 +38,12 @@ urlpatterns = [
     url(r'update/note/(?P<note_id>[0-9]+)/$', views.update_note, name='note-update'),
     # /delete/note/1/
     url(r'delete/note/(?P<note_id>[0-9]+)/$', views.delete_note, name='note-delete'),
+
+    # /favorite/1
+    url(r'^favorite/(?P<note_id>[0-9]+)/$',views.favorite, name = 'add-favorite'),
+
+    # /favorite/all
+    url(r'^favorite/all/$',views.FavoriteView.as_view(), name = 'allfavorite'),
 
     # api
 

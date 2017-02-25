@@ -1,6 +1,6 @@
 from django.views import generic
-from django.views.generic.edit import CreateView
-from .models import Notebook,Note
+from django.urls import reverse
+from .models import Notebook,Note,Favorite
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
@@ -57,6 +57,22 @@ class NoteBookView(generic.ListView):
             return self.render_to_response(context)
 
 # all notes view for listing all notes.
+class AllNotebooksView(generic.ListView):
+    template_name = 'wowCS/show_all_notebooks.html'
+    context_object_name = 'all_notebooks'
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return render(request, 'wowCS/login.html')
+        else:
+            self.object_list = self.get_queryset()
+            context = self.get_context_data()
+            return self.render_to_response(context)
+
+    def get_queryset(self):
+        return Notebook.objects.filter(user=self.request.user)
+
+# all notes view for listing all notes.
 class AllNotesView(generic.ListView):
     template_name = 'wowCS/show_all_notes.html'
     context_object_name = 'all_notes'
@@ -84,11 +100,14 @@ def detail(request,note_id):
     note = Note.objects.get(id=note_id)
     if note.ispublic:
         html = pypandoc.convert_text(note.note_content, 'html', format='md')
-        return render(request, 'wowCS/detail.html', {'note': note, 'note_content': html,'islogin':login_status})
+        context = {'note': note, 'note_content': html, 'islogin': login_status}
+        if login_status:
+            if int(note_id) in [int(f.favorite_id) for f in Favorite.objects.filter(user=request.user)]:
+                context['is_favorite'] = True
+        return render(request, 'wowCS/detail.html',context )
     # show the private detail only if the requested note belongs to the current user
     if not login_status:
         return render(request, 'wowCS/wrong.html', {'islogin':False,'error_message': "<h1>You have to login before seeing this private note.</h1>"})
-
     if note.user==request.user:
         html = pypandoc.convert_text(note.note_content, 'html',format='md')
         return render(request, 'wowCS/detail.html', {'note': note,'note_content':html})
@@ -108,7 +127,7 @@ def log_in(request):
             login(request, user)
             return redirect('/')
         else:
-            return render(request, 'wowCS/login.html', {'error_message': 'Invalid login'})
+            return render(request, 'wowCS/login.html', {'islogin':False,'error_message': 'Invalid login'})
     return render(request, 'wowCS/login.html')
 
 def log_out(request):
@@ -281,6 +300,42 @@ def delete_note(request, note_id):
     instance.delete()
     return returning
 
+
+def favorite(request,note_id):
+    login_status = request.user.is_authenticated()
+    if not login_status:
+        return render(request, 'wowCS/wrong.html', {'islogin': False,
+                                                    'error_message': "<h1>You have to login first.</h1>"})
+    note = Note.objects.get(id=note_id)
+    if note.ispublic:
+        try:
+            f = Favorite()
+            f.user,f.favorite_id = request.user,note_id
+            f.save()
+            note.favorite_count += 1
+            note.save()
+            return redirect(reverse('wowCS:detail', kwargs={'note_id': note_id}))
+        except:
+            return redirect(reverse('wowCS:detail', kwargs={'note_id': note_id}))
+    else:
+        return render(request, 'wowCS/wrong.html', {'islogin': False,
+                                                    'error_message': "<h1>Invalid request.</h1>"})
+
+class FavoriteView(generic.ListView):
+    template_name = 'wowCS/show_all_notes.html'
+    context_object_name = 'all_notes'
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return render(request, 'wowCS/login.html')
+        else:
+            self.object_list = self.get_queryset()
+            context = self.get_context_data()
+            return self.render_to_response(context)
+
+    def get_queryset(self):
+        notes = [f.favorite_id for f in Favorite.objects.filter(user=self.request.user)]
+        return Note.objects.filter(pk__in=notes)
 
 
 

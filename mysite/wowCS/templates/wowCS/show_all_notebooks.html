@@ -1,0 +1,25 @@
+{% extends 'wowCS/base.html' %}
+
+{% block navbar %}
+{% include 'wowCS/navbar.html' with islogin=True %}
+{% endblock %}
+
+{% block body %}
+    {% if all_notebooks %}
+
+        <h3> My notebooks:</h3>
+        <div class="list-group">
+            {% for notebook in all_notebooks %}
+              <a  class="list-group-item"
+                  href = '{% url 'wowCS:catalogue' notebook.notebook_title %}'>{{notebook.notebook_title}}
+              </a>
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <h3> You don't have any notebook yet.</h3>
+
+    {% endif %}
+
+{% endblock %}
