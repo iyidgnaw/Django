@@ -29,30 +29,32 @@
 
                 {% if islogin %}
                     <li class="" >
+                      <a id="menu3" class="dropdown-toggle" data-toggle="dropdown" href="{% url 'wowCS:index' %}">
+                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;MyNoteBook
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent1</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent2</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:notebook-add' %}">New Notebook</a></li>
+                      </ul>
+                    </li>
+                    <li class="" >
                       <a id="menu2" class="dropdown-toggle" data-toggle="dropdown" href="">
-                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;Notes
+                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;MyNotes
                       </a>
-                      <ul class="dropdown-menu recent-notes" role="menu" aria-labelledby="menu2">
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent1</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent2</a></li>
+                        <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:note-add' %}">New Note</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/allnote/">All Notes</a></li>
-                        <li role="presentation" class="divider"></li>
                       </ul>
                     </li>
                     <li class="" >
-                      <a id="menu1" class="dropdown-toggle" data-toggle="dropdown" href="{% url 'wowCS:index' %}">
-                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;NoteBooks
-                      </a>
-                      <ul class="dropdown-menu recent-notebooks" role="menu" aria-labelledby="menu1">
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:notebook-add' %}">New Notebook</a></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="/allnotebook/">All Notebook</a></li>
-                        <li role="presentation" class="divider"></li>
-                      </ul>
-                    </li>
-                    <li class="" >
-                        <a id="menu3" class="dropdown-toggle" href="#" data-toggle="dropdown">
+                        <a class="dropdown-toggle" id="menu3" href="#" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;USER
                         </a>
-                        <ul class="dropdown-menu user-btn" role="menu" aria-labelledby="menu3">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:profile' %}">Profile</a></li>
                           <li role="presentation" class="divider"></li>
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:logout' %}">Logout</a></li>
@@ -61,19 +63,19 @@
                 {% else %}
                     <li class="" >
                       <a  href="{% url 'wowCS:login' %}">
-                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;NoteBooks
+                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;MyNoteBook
                       </a>
 
                     </li>
                     <li class="" >
                       <a  href="{% url 'wowCS:login' %}">
-                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;New Notebook
+                          <span class="glyphicon" aria-hidden="true"></span>&nbsp;MyNotes
                       </a>
 
                     </li>
                     <li class="" >
                         <a class="dropdown-toggle" id="menu3" href="#" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Sign in / Sign up
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Sign in or Sign up
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:login' %}">Sign in</a></li>

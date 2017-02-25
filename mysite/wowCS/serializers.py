@@ -5,7 +5,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ('note_title','id')
+        fields = ('note_title',)
 
 
 
@@ -13,4 +13,4 @@ class NoteBookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notebook
-        fields = ('notebook_title','id')
+        fields = ('notebook_title',)
