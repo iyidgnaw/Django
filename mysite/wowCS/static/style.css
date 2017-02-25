@@ -10,3 +10,24 @@ body{
 .navbar-brand{
     font-family:'Satisfy',cursive;
 }
+
+.error-message {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding:10px 5px 10px 40px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+
+.wmd-panel {
+  margin-left: 0%;
+  margin-right: 0%;
+  min-width: 70%;
+}
+.wmd-input,
+.wmd-preview {
+  background-color: #F5F6E8
+}
+ 
