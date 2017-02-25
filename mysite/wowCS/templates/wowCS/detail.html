@@ -1,5 +1,12 @@
 {% extends 'wowCS/base.html' %}
 {% block title %}{{ note.note_title }}{% endblock %}
+
+{% block navbar %}
+
+{% include 'wowCS/navbar.html' with islogin=islogin %}
+
+{% endblock %}
+
 {% block body %}
 
 

@@ -18,18 +18,19 @@ import re
 class IndexView(generic.ListView):
 
     template_name = 'wowCS/index.html'
-    context_object_name = 'all_notebook'
+    context_object_name = 'all_note'
 
     def get_queryset(self):
-        return Notebook.objects.filter(user=self.request.user)
+        return Note.objects.filter(ispublic=True)
 
     def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
-            return render(request, 'wowCS/login.html')
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+        if request.user.is_authenticated():
+            context['islogin'] = True
         else:
-            self.object_list = self.get_queryset()
-            context = self.get_context_data()
-            return self.render_to_response(context)
+            context['islogin'] = False
+        return self.render_to_response(context)
 
 # catalogue view for given notebook_title
 class NoteBookView(generic.ListView):
@@ -77,16 +78,22 @@ class AllNotesView(generic.ListView):
 
 #detail view for the detail of a note
 def detail(request,note_id):
-    if not request.user.is_authenticated():
-        return render(request, 'wowCS/login.html')
-
+    # if not request.user.is_authenticated():
+    #     return render(request, 'wowCS/login.html')
+    login_status = request.user.is_authenticated()
     note = Note.objects.get(id=note_id)
-    # show the detail only if the requested note belongs to the current user
+    if note.ispublic:
+        html = pypandoc.convert_text(note.note_content, 'html', format='md')
+        return render(request, 'wowCS/detail.html', {'note': note, 'note_content': html,'islogin':login_status})
+    # show the private detail only if the requested note belongs to the current user
+    if not login_status:
+        return render(request, 'wowCS/wrong.html', {'islogin':False,'error_message': "<h1>You have to login before seeing this private note.</h1>"})
+
     if note.user==request.user:
         html = pypandoc.convert_text(note.note_content, 'html',format='md')
         return render(request, 'wowCS/detail.html', {'note': note,'note_content':html})
     else:
-        return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't see that note!</h1>"})
+        return render(request, 'wowCS/wrong.html', {'islogin':True,'error_message': "<h1>You can't see that note!</h1>"})
 
 
 # functions and class for login/logout/register/profile

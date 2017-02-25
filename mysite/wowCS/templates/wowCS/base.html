@@ -17,72 +17,9 @@
 
 
 <body>
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+    {% block navbar %}
 
-        <!--Header-->
-        <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'wowCS:index' %}">wowCS</a>
-        </div>
-
-
-        <!-- Items-->
-        <div class="collapse navbar-collapse" id="topNavBar">
-            <form class="navbar-form navbar-left" role="search" method="get" action="#">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="q" value="">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-            </form>
-
-            <!--ul class="nav navbar-nav">
-
-            </ul-->
-            <ul class="nav navbar-nav navbar-right">
-              <li class="" >
-                  <a id="menu3" class="dropdown-toggle" data-toggle="dropdown" href="{% url 'wowCS:index' %}">
-                      <span class="glyphicon" aria-hidden="true"></span>&nbsp;Notebooks
-                  </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent1</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:index' %}">recent2</a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:notebook-add' %}">New Notebook</a></li>
-                  </ul>
-              </li>
-              <li class="" >
-                  <a id="menu2" class="dropdown-toggle" data-toggle="dropdown" href="">
-                      <span class="glyphicon" aria-hidden="true"></span>&nbsp;Notes
-                  </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent1</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:show_all_notes' %}">recent2</a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:note-add' %}">New Note</a></li>
-                  </ul>
-              </li>
-                <li class="" >
-                    <a class="dropdown-toggle" id="menu3" href="#" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;USER
-                    </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:profile' %}">Profile</a></li>
-                      <li role="presentation" class="divider"></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'wowCS:logout' %}">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-
-</nav>
+    {% endblock %}
     <div class="container">
     {% block body %}
 

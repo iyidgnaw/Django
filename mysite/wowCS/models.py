@@ -9,8 +9,8 @@ from django.contrib.auth.models import Permission, User
 class Notebook(models.Model):
     user = models.ForeignKey(User, default=1)
     notebook_title = models.CharField(max_length=500)
-    genre = models.CharField(max_length=100,default='Not Classified')
     notebook_description = models.CharField(max_length=250,null=True)
+
 
     class Meta:
         unique_together = ('user', 'notebook_title',)
@@ -27,7 +27,12 @@ class Note(models.Model):
     user = models.ForeignKey(User, default=1)
     note_title = models.CharField(max_length=200)
     note_content = models.TextField()
-    is_favorite = models.BooleanField(default=False)
+    # public/private status
+    ispublic = models.BooleanField(default=True)
+    # the status of being marked as favorite.
+    # is_favorite = models.BooleanField(default=False)
+    # the count of up vote.
+    # upcount =
 
     def get_absolute_url(self):
         return reverse('wowCS:catalogue',kwargs={'notebook_title':self.notebook})

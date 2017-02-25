@@ -1,6 +1,10 @@
 {% extends 'wowCS/base.html' %}
 {% block title %}Login{% endblock %}
 
+{% block navbar %}
+{% include 'wowCS/navbar.html' with islogin=False %}
+{% endblock %}
+
 {% block body %}
 <div class="container-fluid">
 

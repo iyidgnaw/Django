@@ -1,5 +1,11 @@
 {% extends 'wowCS/base.html' %}
 {% block title %}Notebook Catalogue{% endblock %}
+
+{% block navbar %}
+
+{% include 'wowCS/navbar.html' with islogin=True %}
+
+{% endblock %}
 {% block body %}
 
     <h1>{{ notebook.notebook_title }}</h1>

@@ -1,5 +1,10 @@
 {% extends 'wowCS/base.html' %}
 {% block title %}Permission Denied{% endblock %}
+
+{% block navbar %}
+{% include 'wowCS/navbar.html' with islogin=islogin %}
+{% endblock %}
+
 {% block body %}
 
 

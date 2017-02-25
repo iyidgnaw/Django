@@ -10,7 +10,7 @@ class NoteBookForm(forms.ModelForm):
 
 	class Meta:
 		model = Notebook
-		fields = ('notebook_title','genre','notebook_description')
+		fields = ('notebook_title','notebook_description')
 
 
 class NoteForm(forms.ModelForm):
@@ -23,7 +23,7 @@ class NoteForm(forms.ModelForm):
 	note_content = forms.CharField(widget=PagedownWidget())
 	class Meta:
 		model = Note
-		fields = ['notebook','note_title','note_content']
+		fields = ['notebook','note_title','note_content','ispublic']
 
 
 class UserForm(forms.ModelForm):
