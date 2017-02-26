@@ -161,7 +161,7 @@ class UserFormView(View):
 
             user.set_password(password)
             user.save()
-            
+
             # Generate a default empty notebook for user.
             defaultNB = Notebook()
             defaultNB.notebook_title = 'default'
@@ -214,7 +214,7 @@ def create_notebook(request):
 def update_notebook(request,notebook_title):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
-    
+
     instance = get_object_or_404(Notebook, notebook_title=notebook_title)
     form = NoteBookForm(request.POST or None, request.FILES or None, instance=instance)
     if instance.user!=request.user:
@@ -237,8 +237,8 @@ def update_notebook(request,notebook_title):
 def delete_notebook(request, notebook_title):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
-    
-    instance = get_object_or_404(Notebook, notebook_title=notebook_title)
+
+    instance = get_object_or_404(Notebook, notebook_title=notebook_title, user=request.user)
     if instance.user!=request.user:
         return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't delete that notebook!</h1>"})
     instance.delete()
@@ -254,7 +254,7 @@ def create_note(request):
             note = form.save(commit=False)
             note.user = request.user
             note.save()
-            # html = pypandoc.convert_text(note.note_content,'html',format='md') 
+            # html = pypandoc.convert_text(note.note_content,'html',format='md')
             return HttpResponseRedirect(note.get_absolute_url())
         context = {
             "form": form,
@@ -264,15 +264,15 @@ def create_note(request):
 def update_note(request,note_id):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
-    
+
     instance = get_object_or_404(Note, id=note_id)
-    
+
     if instance.user!=request.user:
         return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't change that note!</h1>"})
-    
+
 
     form = NoteForm(request.POST or None, request.FILES or None, instance=instance)
-    
+
     # the form is valid when the method is POST and files exist.
     if form.is_valid():
         instance = form.save(commit=False)
@@ -291,8 +291,8 @@ def update_note(request,note_id):
 def delete_note(request, note_id):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
-    
-    instance = get_object_or_404(Note, id=note_id)
+
+    instance = get_object_or_404(Note, id=note_id, user=request.user)
     notebook = instance.notebook
     if instance.user!=request.user:
         return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't delete that note!</h1>"})
@@ -363,17 +363,3 @@ class RecentNotebookList(APIView):
             notebooks = notebooks[len(notebooks)-5:]
         serializer = NoteBookSerializer(notebooks,many=True)
         return Response(serializer.data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
