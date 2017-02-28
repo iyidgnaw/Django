@@ -2,7 +2,7 @@ from django.views import generic
 from django.urls import reverse
 from .models import Notebook,Note,Favorite,User
 from django.shortcuts import render,redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponseForbidden
 from django.contrib.auth import authenticate,login,logout
 from django.views.generic import View
 from .forms import UserForm,NoteBookForm,NoteForm
@@ -382,7 +382,7 @@ class RecentNoteList(APIView):
 
     # List all notes
     def get(self,request):
-        notes = Note.objects.filter(user=request.user)
+        notes = Note.objects.filter(ispublic=True)
         if len(notes)<=10:
             pass
         else:
@@ -394,13 +394,16 @@ class RecentNotebookList(APIView):
 
     # List all notebooks
     def get(self,request):
-        notebooks = Notebook.objects.filter(user=request.user)
-        if len(notebooks)<=10:
-            pass
+        if request.user.is_authenticated():
+            notebooks = Notebook.objects.filter(user=request.user)
+            if len(notebooks)<=10:
+                pass
+            else:
+                notebooks = notebooks[len(notebooks)-5:]
+            serializer = NoteBookSerializer(notebooks,many=True)
+            return Response(serializer.data)
         else:
-            notebooks = notebooks[len(notebooks)-5:]
-        serializer = NoteBookSerializer(notebooks,many=True)
-        return Response(serializer.data)
+            return HttpResponseForbidden()
 
 
 class Preview(APIView):
