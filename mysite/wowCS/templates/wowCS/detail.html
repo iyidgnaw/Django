@@ -18,9 +18,9 @@
 
     <div class="buttom-options">
     {% if is_favorite %}
-      <a class="btn  btn--icon  btn--favorite" noteid="{{ note.note_id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
+      <a class="btn  btn--icon  btn--favorite" noteid="{{ note.id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
     {% else %}
-      <a class="btn  btn--icon  btn--default" noteid="{{ note.note_id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
+      <a class="btn  btn--icon  btn--default" noteid="{{ note.id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
     {% endif %}
     </div>
 {% endblock %}

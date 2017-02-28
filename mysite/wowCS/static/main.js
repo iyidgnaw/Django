@@ -79,7 +79,8 @@ $('.btn--default').click(function(e){
   var favoriteCount = parseInt(favoriteCountE.text());
   console.log($(this));
   favoriteCountE[0].innerText = (favoriteCount+1);
-  var noteID = e.target.getAttribute('noteid');
+  var noteID = $(this).attr('noteid');
+  console.log(noteID);
   $.getJSON('/favorite/'+noteID,{});
 });
 
