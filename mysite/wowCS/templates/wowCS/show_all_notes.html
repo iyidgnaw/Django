@@ -8,7 +8,7 @@
 {% if all_notes %}
 
 <div class="col-md-4">
-  <h3>All My Notes</h3>
+  <h3>{{ header_text }}</h3>
 
   <div class="container">
     <div class="btn-toolbar" role="toolbar">
@@ -38,7 +38,7 @@
 
 {% else %}
 
-<h3> You don't have any note yet.</h3>
+<h3> No notes to display.</h3>
 
 {% endif %}
 

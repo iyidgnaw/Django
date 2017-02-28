@@ -45,6 +45,11 @@ urlpatterns = [
     # /favorite/all
     url(r'^favorite/all/$',views.FavoriteView.as_view(), name = 'allfavorite'),
 
+    # /see/1
+    # public profile page for user 1.
+    url(r'^see/(?P<user_id>[0-9]+)/$',views.UserView.as_view(), name = 'see'),
+
+
     # api
 
     # method : get

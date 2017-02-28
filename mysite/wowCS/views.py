@@ -1,6 +1,6 @@
 from django.views import generic
 from django.urls import reverse
-from .models import Notebook,Note,Favorite
+from .models import Notebook,Note,Favorite,User
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
@@ -84,6 +84,7 @@ class AllNotesView(generic.ListView):
         else:
             self.object_list = self.get_queryset()
             context = self.get_context_data()
+            context['header_text'] = "All my notes"
             return self.render_to_response(context)
 
     def get_queryset(self):
@@ -187,6 +188,28 @@ def profile(request):
         return render(request, 'wowCS/login.html')
     return render(request,'wowCS/profile.html',{'user':request.user})
 
+class UserView(generic.ListView):
+    template_name = 'wowCS/show_all_notes.html'
+    context_object_name = 'all_notes'
+
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+        context['header_text'] = "All notes from this user"
+        return self.render_to_response(context)
+
+    def get_queryset(self):
+        notes= []
+        target = User.objects.get(id=self.kwargs.get('user_id'))
+        for notebook in Notebook.objects.filter(user=target):
+            for note in notebook.note_set.all():
+                if note.ispublic:
+                    notes.append(note.pk)
+        return Note.objects.filter(pk__in=notes)
+
+
+
+
 
 # create/update/delete/ notebook
 def create_notebook(request):
@@ -272,7 +295,7 @@ def update_note(request,note_id):
         return render(request, 'wowCS/wrong.html', {'error_message': "<h1>You can't change that note!</h1>"})
 
 
-    form = NoteForm(request.POST or None, request.FILES or None, instance=instance)
+    form = NoteForm(request.POST or None, request.FILES or None, instance=instance,user=request.user,)
 
     # the form is valid when the method is POST and files exist.
     if form.is_valid():
@@ -332,6 +355,7 @@ class FavoriteView(generic.ListView):
         else:
             self.object_list = self.get_queryset()
             context = self.get_context_data()
+            context['header_text'] = "All my favorite notes"
             return self.render_to_response(context)
 
     def get_queryset(self):
