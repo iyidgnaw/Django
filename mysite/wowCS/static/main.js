@@ -32,6 +32,12 @@ $('#confirm-delete').click(function(e){
   $.getJSON('/delete/note/'+e.target.getAttribute('noteid'),{});
   location.reload();
 });
+
+$('#edit-note').click(function(e){
+  e.stopPropagation();
+  console.log($(this).attr('href'));
+  window.location.replace($(this).attr('href'));
+});
 /*
 $('#modal-from-dom').on('show', function() {
     var noteID = $(this).data('noteID');
