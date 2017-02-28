@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Permission, User
-
+from datetime import datetime
 
 # Create your models here.
 class Notebook(models.Model):
@@ -31,7 +31,7 @@ class Note(models.Model):
     ispublic = models.BooleanField(default=True)
     # the count of marked as favorite.
     favorite_count = models.IntegerField(default=0)
-
+    date = models.DateTimeField(default=datetime.now, blank=True)
     def get_absolute_url(self):
         return reverse('wowCS:catalogue',kwargs={'notebook_title':self.notebook})
 

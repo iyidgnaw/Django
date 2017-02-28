@@ -48,8 +48,12 @@ urlpatterns = [
     # api
 
     # method : get
-    url(r'^api/5recentnotes/$', views.RecentNoteList.as_view(), name='5recentnotes'),
+    url(r'^api/10recentnotes/$', views.RecentNoteList.as_view(), name='5recentnotes'),
     # method : get
-    url(r'^api/5recentnotebooks/$',views.RecentNotebookList.as_view(),name='5recentnotebooks'),
+    url(r'^api/10recentnotebooks/$',views.RecentNotebookList.as_view(),name='5recentnotebooks'),
+
+    url(r'^api/10popular/$',views.Popular.as_view(),name='popular'),
+
+    url(r'^api/preview/(?P<id>[0-9]+)/$',views.Preview.as_view(),name='preview'),
 
 ]

@@ -17,7 +17,7 @@
           <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
 
             {% for note in all_note %}
-            <a class="btn btn-default" role="button" onclick='window.location="{% url 'wowCS:note-update' note.id %}"'>
+            <a class="btn btn-default" role="button" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
               {{note.note_title}}
               <span class="pull-right">
                 <span class="btn btn-xs btn-default" href='{% url 'wowCS:note-update' note.id %}'>

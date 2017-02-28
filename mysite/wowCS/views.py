@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 import pypandoc
 import re
+from datetime import datetime
 
 
 
@@ -345,7 +346,7 @@ class RecentNoteList(APIView):
     # List all notes
     def get(self,request):
         notes = Note.objects.filter(user=request.user)
-        if len(notes)<=5:
+        if len(notes)<=10:
             pass
         else:
             notes = notes[len(notes)-5:]
@@ -357,9 +358,30 @@ class RecentNotebookList(APIView):
     # List all notebooks
     def get(self,request):
         notebooks = Notebook.objects.filter(user=request.user)
-        if len(notebooks)<=5:
+        if len(notebooks)<=10:
             pass
         else:
             notebooks = notebooks[len(notebooks)-5:]
         serializer = NoteBookSerializer(notebooks,many=True)
+        return Response(serializer.data)
+
+
+class Preview(APIView):
+    def get(self, request, *args, **kwargs):
+        note = Note.objects.get(id=self.kwargs.get('id'))
+        if note.ispublic:
+            pass
+        else:
+            if request.user.is_authenticated() and note.user==request.user:
+                pass
+            else:
+                note = None
+        serializer = NoteSerializer(note)
+        return Response(serializer.data)
+
+class Popular(APIView):
+    def get(self, request):
+        notes = Note.objects.filter(ispublic=True)
+        notes = sorted(notes,key=lambda x:x.favorite_count,reverse=True)[:10]
+        serializer = NoteSerializer(notes,many=True)
         return Response(serializer.data)

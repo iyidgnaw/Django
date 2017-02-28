@@ -10,6 +10,7 @@
 {% block body %}
 
     <p><strong>This note has been marked as favorite {{ note.favorite_count }} times</strong></p>
+    <p>Created at {{ note.date }}</p>
     {{ note_content|safe }}
 
     {% if error_message %}
