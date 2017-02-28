@@ -49,6 +49,7 @@ urlpatterns = [
     # public profile page for user 1.
     url(r'^see/(?P<user_id>[0-9]+)/$',views.UserView.as_view(), name = 'see'),
 
+    url(r'^search/$', views.SearchView.as_view(), name='search'),
 
     # api
 

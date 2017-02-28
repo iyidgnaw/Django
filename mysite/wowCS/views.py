@@ -362,6 +362,19 @@ class FavoriteView(generic.ListView):
         notes = [f.favorite_id for f in Favorite.objects.filter(user=self.request.user)]
         return Note.objects.filter(pk__in=notes)
 
+class SearchView(generic.ListView):
+    template_name = 'wowCS/show_all_notes.html'
+    context_object_name = 'all_notes'
+
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+        context['header_text'] = "Here are the results:"
+        return self.render_to_response(context)
+
+    def get_queryset(self):
+        search_query = self.request.GET.get('search_box', None)
+        return Note.objects.filter(note_title=search_query)
 
 
 # restful API
