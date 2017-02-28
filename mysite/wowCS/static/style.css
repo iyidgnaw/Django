@@ -45,3 +45,83 @@ body{
     color: #EEE;
     z-index: 1000;
 }
+
+/* Base */
+.buttom-options {
+    padding: 0.125em;
+    font-size: 200%;
+}
+
+
+
+/* Button */
+.buttom-options .btn {
+    margin: 0.25em;
+    float: left;
+    clear: both;
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+
+
+/* Button elements */
+.buttom-options .btn > span,
+.buttom-options .btn--icon > i {
+    padding: 0.5em 1em;
+    display: inline-block;
+    transition: 0.25s all;
+}
+.buttom-options .btn > span {
+    border-radius: 0.25em;
+    white-space: nowrap;
+    color: #222;
+    background: #ddd;
+}
+.buttom-options .btn:hover > span {
+    background: lightgreen;
+}
+.buttom-options .btn:active > span {
+    background: limegreen;
+    transition: none;
+}
+
+
+
+/* Button with an icon */
+.buttom-options .btn--icon > i {
+    border-radius: 0.25em 0 0 0.25em;
+    position: relative;
+    font-weight: bold;
+    font-style: normal;
+    color: white;
+    background: #222;
+}
+.buttom-options .btn--icon > i:after {
+    content: "";
+    border: 0.35em solid;
+    border-color: transparent transparent transparent #222;
+    position: absolute;
+    top: 0.775em;
+    right: -0.65em;
+}
+.buttom-options .btn--icon:hover > i,
+.buttom-options .btn--icon:focus > i {
+    color: #ddd;
+}
+.buttom-options .btn--icon > span {
+    border-radius: 0 0.25em 0.25em 0;
+}
+
+
+
+/* Button custom states */
+.buttom-options .btn--favorite:hover > i,
+.buttom-options .btn--favorite:focus > i { color: gold; }
+.buttom-options .btn--add:hover > i,
+.buttom-options .btn--add:focus > i { color: lightblue; }
+.buttom-options .btn--delete:hover > i,
+.buttom-options .btn--delete:focus > i { color: orangered; }
+.buttom-options .btn--favorite > span { background: gold; }
+.buttom-options .btn--add > span { background: lightblue; }
+.buttom-options .btn--delete > span { background: orangered; }

@@ -1,8 +1,8 @@
 (function () {'use strict';}()); // don't touch this line
 
 
-var recent5notesAPI = '/api/5recentnotes/';
-var recent5notebooksAPI = '/api/5recentnotebooks/';
+var recent10notesAPI = '/api/10recentnotes/';
+var recent10notebooksAPI = '/api/10recentnotebooks/';
 
 
 var menuItem = function (title,id) {
@@ -10,7 +10,7 @@ var menuItem = function (title,id) {
 };
 
 var getRecentNotes = function(){
-  $.getJSON(recent5notesAPI, {}).done(
+  $.getJSON(recent10notesAPI, {}).done(
     function (data) {
       //console.log(data);
       for (i = 0; i < data.length; i++)
@@ -19,7 +19,7 @@ var getRecentNotes = function(){
 );};
 
 var getRecentNotebooks = function(){
-  $.getJSON(recent5notebooksAPI, {}).done(
+  $.getJSON(recent10notebooksAPI, {}).done(
     function (data) {
       console.log(data);
       for (i = 0; i < data.length; i++)
@@ -72,6 +72,16 @@ $('#confirm-delete').on('click', function(e) {
     $('.btn-ok', this).data('recordId', data.recordId);
 });
 
+$('.btn--default').click(function(e){
+  if ($(this).hasClass('btn--favorite')){ return; }
+  $(this).removeClass('btn--default').addClass('btn--favorite');
+  var favoriteCountE = $(this).children(":first");
+  var favoriteCount = parseInt(favoriteCountE.text());
+  console.log($(this));
+  favoriteCountE[0].innerText = (favoriteCount+1);
+  var noteID = e.target.getAttribute('noteid');
+  $.getJSON('/favorite/'+noteID,{});
+});
 
 /*
 $('#confirm-delete').on('show.bs.modal', function(e) {
