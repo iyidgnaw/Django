@@ -42,6 +42,7 @@ Diyi
 Xueguang
 
 - Add Drop downs and list display.
+- Add edit button and delete button for notes.
 
 #### 2.23 Version 0.4
 
@@ -58,6 +59,11 @@ Diyi
 - Solve the duplicate notebook name problem.
 
 - add empty default notebook for new user.
+
+Xueguang 
+
+- Add favorite button
+- Handling note edit/view/delete redirection problem in jquery. (main.js)
 
   ​
 
