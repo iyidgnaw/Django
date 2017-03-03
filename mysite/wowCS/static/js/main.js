@@ -100,7 +100,7 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
 */
 $(document).ready(
   function() {
-    //console.log('ready!');
+    console.log('document ready! enjoy.');
     getRecentNotes();
     getRecentNotebooks();
   }

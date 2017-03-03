@@ -1,13 +1,14 @@
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 footer {
     margin: 50px 0;
 }
-
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #777;
+}
 .navbar.transparent.navbar-inverse.navbar-fixed-top {
-
    background: #FFFFFF;
 }
 .navbar-collapse .navbar-nav li a{
@@ -23,7 +24,7 @@ footer {
 
 .navbar-header .navbar-brand:hover,
 .navbar-collapse .navbar-nav li a:hover {
-	color:grey;
+	color:darkgrey;
 }
 
 .bd-pageheader{
