@@ -1,15 +1,43 @@
-body{
-    background: white url("images/background.png");
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-.navbar {
-    border-radius: 0px !important;
+footer {
+    margin: 50px 0;
+}
+
+.navbar.transparent.navbar-inverse.navbar-fixed-top {
+
+   background: #FFFFFF;
+}
+.navbar-collapse .navbar-nav li a{
+	font-family: "Helvetica Neue",Arial,sans-serif;
+	color:#17202A ;
+}
+
+.navbar-header .navbar-brand {
+	font-weight: 30em;
+	font-size:2.5em;
+	color:#17202A ;
+}
+
+.navbar-header .navbar-brand:hover,
+.navbar-collapse .navbar-nav li a:hover {
+	color:grey;
+}
+
+.bd-pageheader{
+	color: #cdbfe3;
+	background-color: #563d7c;
+
+}
+
+.bd-pageheader h1 {
+    font-size: 4rem;
+    color:#FFFFFF;
 }
 
 
-.navbar-brand{
-    font-family:'Satisfy',cursive;
-}
 
 .error-message {
   border: 1px solid;
