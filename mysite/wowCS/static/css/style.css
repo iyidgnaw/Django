@@ -22,6 +22,10 @@ footer {
 	color:#17202A ;
 }
 
+.navbar-header .navbar-brand:focus {
+  color: black;
+}
+
 .navbar-header .navbar-brand:hover,
 .navbar-collapse .navbar-nav li a:hover {
 	color:darkgrey;
@@ -51,9 +55,9 @@ footer {
 }
 
 .wmd-panel {
-  margin-left: 0%;
-  margin-right: 0%;
-  min-width: 70%;
+  margin-left: 0%!important;
+  margin-right: 0%!important;
+  min-width: 90%!important;
 }
 .wmd-input,
 .wmd-preview {

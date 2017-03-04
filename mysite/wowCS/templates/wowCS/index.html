@@ -10,8 +10,8 @@
 {% block body %}
     <div class="bd-pageheader">
         <div class="container">
-            <h3>Welcome</h3>
-            <p class="lead">This is Marknote, a place for markdown blogs, where sharing and viewing complex thoughts made easily.</p>
+            <h3>Welcome to Marknote</h3>
+            <p class="lead">A place for your markdown blogs, where sharing and browsing complex thoughts made easily.</p>
         </div>
     </div>
     {% if all_note %}
@@ -37,12 +37,11 @@
             </p>
             <p><span class="glyphicon glyphicon-time"></span> Posted on preview-time-placeholder</p>
             <p>preview-api placeholder</p>
-            <a class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
+            <a  href="#" class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
               Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
             <hr>
-
             {% endfor %}
+
           </div>
       </div>
 
