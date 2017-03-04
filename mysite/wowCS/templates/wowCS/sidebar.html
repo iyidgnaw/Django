@@ -10,20 +10,22 @@
                 </form>
         </div>
 
-
+        {% if islogin %}
         <!-- Your Notebooks Widget -->
         <div class="well">
             <h4>Your Notebooks</h4>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="list-unstyled mb-0">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">Freebies</a></li>
-                        </ul>
-                    </div>
-                </div>
+            <ul class="notebooklist">
+
+
+            </ul>
+
         </div>
+        {% else %}
+            <div class="well">
+                <p>You have to login first.</p>
+            </div>
+
+        {% endif %}
 
         <!-- Website Info -->
         <div class="well">

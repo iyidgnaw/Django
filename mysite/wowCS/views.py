@@ -186,6 +186,9 @@ class UserFormView(View):
 def profile(request):
     if not request.user.is_authenticated():
         return render(request, 'wowCS/login.html')
+
+
+
     return render(request,'wowCS/profile.html',{'user':request.user})
 
 class UserView(generic.ListView):
@@ -425,3 +428,23 @@ class Popular(APIView):
         notes = sorted(notes,key=lambda x:x.favorite_count,reverse=True)[:10]
         serializer = NoteSerializer(notes,many=True)
         return Response(serializer.data)
+
+class UserCatagory(APIView):
+    def get(self,request):
+        if request.user.is_authenticated():
+            notebooks = Notebook.objects.filter(user=request.user)
+            serializer = NoteBookSerializer(notebooks,many=True)
+            return Response(serializer.data)
+        else:
+            return HttpResponseForbidden()
+
+class NotebookCatagory(APIView):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            notebook = Notebook.objects.get(notebook_title=self.kwargs.get('notebook_title'))
+            if notebook.user==request.user:
+                notes = notebook.note_set.all()
+                serializer = NoteSerializer(notes,many=True)
+                return Response(serializer.data)
+        else:
+            return HttpResponseForbidden()

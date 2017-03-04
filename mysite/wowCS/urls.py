@@ -28,9 +28,9 @@ urlpatterns = [
     # # /add_notebook/
     url(r'add/notebook/$', views.create_notebook, name='notebook-add'),
     # /update/notebook/Python/
-    url(r'update/notebook/(?P<notebook_title>[a-zA-Z]+)/$', views.update_notebook, name='notebook-update'), 
+    url(r'update/notebook/(?P<notebook_title>[a-zA-Z0-9]+)/$', views.update_notebook, name='notebook-update'),
     # /delete/notebook/Python/
-    url(r'delete/notebook/(?P<notebook_title>[a-zA-Z]+)/$', views.delete_notebook, name='notebook-delete'), 
+    url(r'delete/notebook/(?P<notebook_title>[a-zA-Z0-9]+)/$', views.delete_notebook, name='notebook-delete'),
 
     # /Python/add/
     url(r'add/note/$', views.create_note, name='note-add'),
@@ -61,5 +61,9 @@ urlpatterns = [
     url(r'^api/10popular/$',views.Popular.as_view(),name='popular'),
 
     url(r'^api/preview/(?P<id>[0-9]+)/$',views.Preview.as_view(),name='preview'),
+
+    url(r'^api/usercatagory/$',views.UserCatagory.as_view(),name="usercatagory"),
+
+    url(r'^api/notesin/(?P<notebook_title>[a-zA-Z0-9]+)/$', views.NotebookCatagory.as_view(), name="notesin"),
 
 ]

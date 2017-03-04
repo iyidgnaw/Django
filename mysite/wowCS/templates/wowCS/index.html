@@ -25,9 +25,9 @@
                 </a>
             </h2>
             <p class="lead">
-                by <a href="#">preview-username-placeholder</a>
+                by <a href="#">{{ note.user }}</a>
             </p>
-            <p><span class="glyphicon glyphicon-time"></span> Posted on preview-time-placeholder</p>
+            <p><span class="glyphicon glyphicon-time"></span> Posted on {{ note.date }}</p>
             <p>preview-api placeholder</p>
             <a class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
               Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -48,6 +48,6 @@
 
 {% block sidebar %}
 
-{% include 'wowCS/sidebar.html' %}
+{% include 'wowCS/sidebar.html' with islogin=True %}
 
 {% endblock %}

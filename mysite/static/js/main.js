@@ -4,35 +4,15 @@
 var recent10notesAPI = '/api/10recentnotes/';
 var recent10notebooksAPI = '/api/10recentnotebooks/';
 var getcatagoryAPI = '/api/usercatagory/';
-var getcatalistAPI = '/api/notesin/'
 
 var menuItem = function (title,id) {
   return '<li role="presentation"><a role="menuitem" tabindex="-1" href="/wowCS/'+id+'/">'+title+'</a></li>';
 };
 
 var cataItem = function(title) {
-    return '<li class=""><a class="dropdown-toggle side-cata" data-toggle="dropdown" href=""> <span class="glyphicon" aria-hidden="true"></span>'+title+'</a><ul class="dropdown-menu" role="menu" aria-labelledby="menu4">'+'</ul></li>';
-
-  // var html = '<li class=""><a class="dropdown-toggle side-cata" data-toggle="dropdown" href=""> <span class="glyphicon" aria-hidden="true"></span>'+title+'</a><ul class="dropdown-menu" role="menu" aria-labelledby="menu4">'
-  //   data = $.getJSON(getcatalistAPI+title+'/',{});
-  //   for (i=0;i<data.length;i++){
-  //       html+=menuItem(data[i].note_title,'note/'+data[i].id)}
-  //
-  //
-  //   return html+'</ul></li>';
-    // return html+'</ul></li>'
+    //return '<li>Wow</li>';
+  return '<li class=""><a class="dropdown-toggle side-cata" data-toggle="dropdown" href=""> <span class="glyphicon" aria-hidden="true"></span>'+title+'</a><ul class="dropdown-menu" role="menu" aria-labelledby="menu4"></ul></li>'
 };
-
-// var cataList = function(title,html){
-//     $.getJSON(getcatalistAPI+title+'/',{}).done(
-//        function(data,html){
-//            console.log(data);
-//            for (i = 0;i<data.length;i++)
-//            {html+=menuItem(data[i].note_title,'note/'+data[i].id)}
-//         return html;
-//        }
-//     );
-// };
 
 var getRecentNotes = function(){
   $.getJSON(recent10notesAPI, {}).done(
@@ -59,6 +39,14 @@ var getCatagory = function(){
             {$('.notebooklist').append(cataItem(data[i].notebook_title));}
         }
 );};
+
+
+
+
+
+
+
+
 
 
 $('#confirm-delete').click(function(e){
@@ -137,6 +125,7 @@ $(document).ready(
     console.log('document ready! enjoy.');
     getRecentNotes();
     getRecentNotebooks();
+    console.log('Hello? Why?');
     getCatagory();
   }
 );
