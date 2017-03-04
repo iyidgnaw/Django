@@ -6,12 +6,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
 
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body row-centered">
                     <h3>Log In</h3>
                     {% if error_message %}
                         <p class="error-message"><strong>{{ error_message }}</strong></p>
@@ -40,14 +35,15 @@
                             </div>
                         </div>
                     </form>
-                </div>
+
                 <div class="panel-footer">
                     Don't have an account? <a href="{% url 'wowCS:register' %}">Click here</a> to register.
                 </div>
-            </div>
-        </div>
-    </div>
 
-</div>
+
+{% endblock %}
+{% block sidebar %}
+
+{% include 'wowCS/sidebar.html' %}
 
 {% endblock %}

@@ -30,9 +30,27 @@
 
     {% endblock %}
 
-    {% block body %}
+    <div class="bd-pageheader">
+        <div class="container">
+            <h1>Welcome</h1>
+            <p class="lead">This is Marknote, a place for markdown blogs, where sharing and viewing complex thoughts made easily.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
 
-    {% endblock %}
+            <div class="col-md-8">
+            {% block body %}
+
+            {% endblock %}
+            </div>
+
+            {% block sidebar %}
+
+            {% endblock %}
+        </div>
+    </div>
+
 
     <div id="modal-from-dom" class="modal hide fade">
         <div class="modal-header">
