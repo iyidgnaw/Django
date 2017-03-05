@@ -9,6 +9,7 @@
 
 {% block body %}
 
+
     {% if all_note %}
 
 
@@ -29,12 +30,19 @@
             </p>
             <p><span class="glyphicon glyphicon-time"></span> Posted on {{ note.date }}</p>
             <p>preview-api placeholder</p>
-            <a class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
+            <a  href="#" class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
               Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
             <hr>
-
             {% endfor %}
+
+          </div>
+      </div>
+
+      {% block footer %}
+
+      {% include 'wowCS/footer.html' %}
+
+      {% endblock %}
 
     {% else %}
 

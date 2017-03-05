@@ -6,13 +6,42 @@
 
 {% block body %}
 {% if all_notes %}
-    {% for element in allnotes %}
-        <h3>{{  }}</h3>
 
 
-    {% endfor %}
 
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <h1 class="page-header">
+        All My Notes
+        <small>Most Recent</small>
+    </h1>
+
+        {% for note in all_notes %}
+
+        <h2>
+            <a href="#" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
+              {{note.note_title}}
+            </a>
+        </h2>
+        <p class="lead">
+            by <a href="#">preview-username-placeholder</a>
+        </p>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on preview-time-placeholder</p>
+        <p> preview-api placeholder preview-api placeholder preview-api placeholder preview-api placeholder preview-api placeholder</p>
+        <a class="btn btn-primary"  href="#" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
+          Read <span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a class="btn btn-primary"  href="#" onclick='window.location="{% url 'wowCS:note-update' note.id %}"'>
+          <span class="glyphicon glyphicon-pencil"></span> Edit / Delete </a>
+
+        <hr>
+        {% endfor %}
+
+  </div>
+
+  </div>
+</div>
 
 
 {% else %}
