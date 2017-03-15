@@ -7,22 +7,21 @@
 {% endblock %}
 
 {% block body %}
-    <h3>{{note.note_title}}</h3>
-    <!--p><strong>This note has been marked as favorite {{ note.favorite_count }} times</strong></p-->
-    <p>Created at {{ note.date }}</p>
-    {{ note_content|safe }}
+<h3>{{note.note_title}}</h3>
+<p class='created-time'>Created at {{ note.date }}</p>
+{{ note_content|safe }}
 
-    {% if error_message %}
-      <p><strong>{{ error_message }}</strong></p>
-    {% endif %}
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
 
-    <div class="buttom-options">
-    {% if is_favorite %}
-      <a class="btn  btn--icon  btn--favorite" noteid="{{ note.id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
-    {% else %}
-      <a class="btn  btn--icon  btn--default" noteid="{{ note.id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
-    {% endif %}
-    </div>
+<div class="buttom-options">
+  {% if is_favorite %}
+  <a class="btn  btn--icon  btn--favorite" noteid="{{ note.id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
+  {% else %}
+  <a class="btn  btn--icon  btn--default" noteid="{{ note.id }}" href=#><i>{{ note.favorite_count }}</i><span>Favorite</span></a>
+  {% endif %}
+</div>
 {% endblock %}
 {% block sidebar %}
 

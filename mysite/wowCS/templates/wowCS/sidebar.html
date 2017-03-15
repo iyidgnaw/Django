@@ -1,34 +1,30 @@
- <div class="col-md-4">
+<div class="sidebar col-md-4">
 
-        <div class="well">
-            <!-- Search Widget -->
-                <form class="navbar-form" role="search" method="get" action="/search/">
-                <div class="form-group">
-                    <input id="search_box" type="text" class="form-control" name="search_box" value="">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-                </form>
-        </div>
-
-        {% if islogin %}
-        <!-- Your Notebooks Widget -->
-        <div class="well">
-            <h4>Your Notebooks</h4>
-            <ul class="notebooklist">
+  <!-- Search Widget -->
+  <div class="well">
+    <form class="navbar-form" role="search" method="get" action="/search/">
+      <div class="form-group">
+        <input id="search_box" type="text" class="form-control" name="search_box" value="">
+      </div>
+      <button type="submit" class="btn btn-default">Search</button>
+    </form>
+  </div>
 
 
-            </ul>
+  <!-- Notebooks Widget -->
+  <div class="well">
+    <h4>Your Notebooks</h4>
 
-        </div>
-        {% else %}
-            <div class="well">
-                <p>You have to login first.</p>
-            </div>
+    {% if islogin %}
+    <ul class="notebooklist"></ul>
+    {% else %}
+    <p> Login to see notebooks.</p>
+    {% endif %}
 
-        {% endif %}
+  </div>
 
-        <!-- Website Info -->
-        <div class="well">
-            <p>Website Information widget</p>
-        </div>
- </div>
+  <!-- Website Info -->
+  <div class="well">
+    <p>Website Information widget</p>
+  </div>
+</div>

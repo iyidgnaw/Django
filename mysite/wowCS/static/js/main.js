@@ -4,7 +4,7 @@
 var recent10notesAPI = '/api/10recentnotes/';
 var recent10notebooksAPI = '/api/10recentnotebooks/';
 var getcatagoryAPI = '/api/usercatagory/';
-var getcatalistAPI = '/api/notesin/'
+var getcatalistAPI = '/api/notesin/';
 
 var menuItem = function (title,id) {
   return '<li role="presentation"><a role="menuitem" tabindex="-1" href="/wowCS/'+id+'/">'+title+'</a></li>';
@@ -124,6 +124,14 @@ $('.btn--default').click(function(e){
   $.getJSON('/favorite/'+noteID,{});
 });
 
+function hideBDPageHeader(){
+  var user = $('#menu3')[0];
+  console.log(user.innerText);
+  if (! user.innerText.includes('Sign in')){
+    document.getElementById('bd-pageheader').style.display = 'none';
+  }
+}
+
 /*
 $('#confirm-delete').on('show.bs.modal', function(e) {
   e.stopPropagation();
@@ -134,6 +142,7 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
 */
 $(document).ready(
   function() {
+    hideBDPageHeader();
     console.log('document ready! enjoy.');
     getRecentNotes();
     getRecentNotebooks();

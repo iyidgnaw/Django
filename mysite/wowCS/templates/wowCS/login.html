@@ -2,7 +2,7 @@
 {% block title %}Login{% endblock %}
 
 {% block navbar %}
-{% include 'wowCS/navbar.html' with islogin=False %}
+  {% include 'wowCS/navbar.html' with islogin=False %}
 {% endblock %}
 
 {% block body %}
@@ -39,11 +39,5 @@
                 <div class="panel-footer">
                     Don't have an account? <a href="{% url 'wowCS:register' %}">Click here</a> to register.
                 </div>
-
-
-{% endblock %}
-{% block sidebar %}
-
-{% include 'wowCS/sidebar.html' %}
 
 {% endblock %}
