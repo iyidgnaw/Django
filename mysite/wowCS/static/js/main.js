@@ -5,13 +5,14 @@ var recent10notesAPI = '/api/10recentnotes/';
 var recent10notebooksAPI = '/api/10recentnotebooks/';
 var getcatagoryAPI = '/api/usercatagory/';
 var getcatalistAPI = '/api/notesin/';
+var gotoNotebookAPI = '/wowCS/notebook/';
 
-var menuItem = function (title,id) {
+function menuItem(title,id) {
   return '<li role="presentation"><a role="menuitem" tabindex="-1" href="/wowCS/'+id+'/">'+title+'</a></li>';
-};
+}
 
-var cataItem = function(title) {
-    return '<li class=""><a class="dropdown-toggle side-cata" data-toggle="dropdown" href=""> <span class="glyphicon" aria-hidden="true"></span>'+title+'</a><ul class="dropdown-menu" role="menu" aria-labelledby="menu4">'+'</ul></li>';
+function cataItem(title) {
+    return '<li class=""><a href="/wowCS/notebook/'+title+'/">'+title+'</a></li>';
 
   // var html = '<li class=""><a class="dropdown-toggle side-cata" data-toggle="dropdown" href=""> <span class="glyphicon" aria-hidden="true"></span>'+title+'</a><ul class="dropdown-menu" role="menu" aria-labelledby="menu4">'
   //   data = $.getJSON(getcatalistAPI+title+'/',{});
@@ -21,7 +22,7 @@ var cataItem = function(title) {
   //
   //   return html+'</ul></li>';
     // return html+'</ul></li>'
-};
+}
 
 // var cataList = function(title,html){
 //     $.getJSON(getcatalistAPI+title+'/',{}).done(
