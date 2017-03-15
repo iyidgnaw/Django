@@ -65,6 +65,12 @@ Xueguang
 - Add favorite button
 - Handling note edit/view/delete redirection problem in jquery. (main.js)
 
-  ​
+#### 3.15 Version 0.5
 
-  ​
+Xueguang 
+
+- Automatically hide welcome banner when logged in.
+- base.html's body now have three blocks: main-content, sidebar, footer
+- fixed bug where links does not work
+- TODO: integrate MVC framework React, along with Redux.
+- TODO: make notebooks section in the sidebar extendable (with dropdowns of their notes). 
