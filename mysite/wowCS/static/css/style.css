@@ -1,41 +1,59 @@
 body {
-    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+  padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 footer {
-    margin: 50px 0;
+  margin: 10px 0;
+  text-align:center;
 }
+
+.sidebar {
+  margin-top: 15px;
+}
+
+.sidebar .form-group {
+  margin:10px 0px;
+}
+
+.buttom-options {
+  height:70px;
+}
+
 .navbar-inverse .navbar-toggle .icon-bar {
-    background-color: #777;
+  background-color: #777;
 }
 .navbar.transparent.navbar-inverse.navbar-fixed-top {
-   background: #FFFFFF;
+  background: #FFFFFF;
 }
 .navbar-collapse .navbar-nav li a{
-	font-family: "Helvetica Neue",Arial,sans-serif;
-	color:#17202A ;
+  font-family: "Helvetica Neue",Arial,sans-serif;
+  color:#17202A ;
 }
 
 .navbar-header .navbar-brand {
-	font-weight: 30em;
-	font-size:2.5em;
-	color:#17202A ;
+  font-weight: 30em;
+  font-size:2.5em;
+  color:#17202A ;
+}
+
+.navbar-header .navbar-brand:focus {
+  color: black;
 }
 
 .navbar-header .navbar-brand:hover,
 .navbar-collapse .navbar-nav li a:hover {
-	color:darkgrey;
+  color:darkgrey;
 }
 
 .bd-pageheader{
-	color: #cdbfe3;
-	background-color: #563d7c;
+  color: #cdbfe3;
+  background-color: #563d7c;
 
 }
 
 .bd-pageheader h1 {
-    font-size: 4rem;
-    color:#FFFFFF;
+  font-size: 4rem;
+  color:#FFFFFF;
 }
 
 
@@ -51,9 +69,9 @@ footer {
 }
 
 .wmd-panel {
-  margin-left: 0%;
-  margin-right: 0%;
-  min-width: 70%;
+  margin-left: 0%!important;
+  margin-right: 0%!important;
+  min-width: 90%!important;
 }
 .wmd-input,
 .wmd-preview {
@@ -61,35 +79,35 @@ footer {
 }
 
 .modal.loading .modal-content:before {
-    content: 'Loading...';
-    text-align: center;
-    line-height: 155px;
-    font-size: 20px;
-    background: rgba(0, 0, 0, .8);
-    position: absolute;
-    top: 55px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: #EEE;
-    z-index: 1000;
+  content: 'Loading...';
+  text-align: center;
+  line-height: 155px;
+  font-size: 20px;
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  top: 55px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #EEE;
+  z-index: 1000;
 }
 
 /* Base */
 .buttom-options {
-    padding: 0.125em;
-    font-size: 200%;
+  padding: 0.125em;
+  font-size: 200%;
 }
 
 
 
 /* Button */
 .buttom-options .btn {
-    margin: 0.25em;
-    float: left;
-    clear: both;
-    font-family: monospace;
-    white-space: nowrap;
+  margin: 0.25em;
+  float: left;
+  clear: both;
+  font-family: monospace;
+  white-space: nowrap;
 }
 
 
@@ -97,49 +115,49 @@ footer {
 /* Button elements */
 .buttom-options .btn > span,
 .buttom-options .btn--icon > i {
-    padding: 0.5em 1em;
-    display: inline-block;
-    transition: 0.25s all;
+  padding: 0.5em 1em;
+  display: inline-block;
+  transition: 0.25s all;
 }
 .buttom-options .btn > span {
-    border-radius: 0.25em;
-    white-space: nowrap;
-    color: #222;
-    background: #ddd;
+  border-radius: 0.25em;
+  white-space: nowrap;
+  color: #222;
+  background: #ddd;
 }
 .buttom-options .btn:hover > span {
-    background: lightgreen;
+  background: lightgreen;
 }
 .buttom-options .btn:active > span {
-    background: limegreen;
-    transition: none;
+  background: limegreen;
+  transition: none;
 }
 
 
 
 /* Button with an icon */
 .buttom-options .btn--icon > i {
-    border-radius: 0.25em 0 0 0.25em;
-    position: relative;
-    font-weight: bold;
-    font-style: normal;
-    color: white;
-    background: #222;
+  border-radius: 0.25em 0 0 0.25em;
+  position: relative;
+  font-weight: bold;
+  font-style: normal;
+  color: white;
+  background: #222;
 }
 .buttom-options .btn--icon > i:after {
-    content: "";
-    border: 0.35em solid;
-    border-color: transparent transparent transparent #222;
-    position: absolute;
-    top: 0.775em;
-    right: -0.65em;
+  content: "";
+  border: 0.35em solid;
+  border-color: transparent transparent transparent #222;
+  position: absolute;
+  top: 0.775em;
+  right: -0.65em;
 }
 .buttom-options .btn--icon:hover > i,
 .buttom-options .btn--icon:focus > i {
-    color: #ddd;
+  color: #ddd;
 }
 .buttom-options .btn--icon > span {
-    border-radius: 0 0.25em 0.25em 0;
+  border-radius: 0 0.25em 0.25em 0;
 }
 
 

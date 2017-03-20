@@ -1,53 +1,36 @@
 {% extends 'wowCS/base.html'  %}
 
-
 {% block navbar %}
-
-{% include 'wowCS/navbar.html' with islogin=islogin %}
-
+  {% include 'wowCS/navbar.html' with islogin=islogin %}
 {% endblock %}
+
 
 {% block body %}
 
-    {% if all_note %}
+{% if all_note %}
+  <h1 class="page-header">
+    Public Notes
+    <small>Most Favorited</small>
+  </h1>
 
+  {% for note in all_note %}
+    <h2>
+      <a onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
+        {{note.note_title}}
+      </a>
+    </h2>
+    <p class="lead">
+      by <a href="#">{{ note.user }}</a>
+    </p>
+    <p><span class="glyphicon glyphicon-time"></span> Posted on {{ note.date }}</p>
+    <p>preview-api placeholder</p>
+    <a  href="#" class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
+      Read More <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  {% endfor %}
 
-
-            <h1 class="page-header">
-                Public Notes
-                <small>Most Favorited</small>
-            </h1>
-
-            {% for note in all_note %}
-            <h2>
-                <a onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
-                  {{note.note_title}}
-                </a>
-            </h2>
-            <p class="lead">
-                by <a href="#">preview-username-placeholder</a>
-            </p>
-            <p><span class="glyphicon glyphicon-time"></span> Posted on preview-time-placeholder</p>
-            <p>preview-api placeholder</p>
-            <a class="btn btn-primary" onclick='window.location="{% url 'wowCS:detail' note.id %}"'>
-              Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-            <hr>
-
-            {% endfor %}
-
-    {% else %}
-
-        <h3> No Notes!</h3>
-
-    {% endif %}
-
-
-
-{% endblock %}
-
-{% block sidebar %}
-
-{% include 'wowCS/sidebar.html' %}
+{% else %}
+  <h3> No Notes!</h3>
+{% endif %}
 
 {% endblock %}

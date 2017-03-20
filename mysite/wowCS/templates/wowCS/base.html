@@ -27,16 +27,15 @@
 
 <body>
     {% block navbar %}
-
     {% endblock %}
 
-    <div class="bd-pageheader">
+    <div class="bd-pageheader" id='bd-pageheader'>
         <div class="container">
             <h1>Welcome</h1>
             <p class="lead">This is Marknote, a place for markdown blogs, where sharing and viewing complex thoughts made easily.</p>
         </div>
     </div>
-    <div class="container">
+    <div class="main-container container">
         <div class="row">
 
             <div class="col-md-8">
@@ -46,7 +45,11 @@
             </div>
 
             {% block sidebar %}
+              {% include 'wowCS/sidebar.html'%}
+            {% endblock %}
 
+            {% block footer %}
+              {% include 'wowCS/footer.html' %}
             {% endblock %}
         </div>
     </div>
